@@ -34,5 +34,5 @@ const dbConnection = async () => {
   app.use(cors);
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8012;
 app.listen(port, () => console.log('Server started successfully')); //Start the server on the specified port 
