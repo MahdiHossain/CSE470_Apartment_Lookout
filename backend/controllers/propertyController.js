@@ -29,17 +29,15 @@ propertyController.get('/find/featured', async (req, res) => {
 // get all from type
 propertyController.get('/find', async (req, res) => {
     const type = req.query
-    let properties = []
     try {
-        if (type) {
-            properties = await Property.find(type).populate("owner", '-password')
+        if(type){
+            const properties = await Property.find(type).populate('currentOwner', '-password')
+            return res.status(200).json(properties)
         } else {
-            properties = await Property.find({})
+            return res.status(500).json({msg: "No such Property type"})
         }
-
-        return res.status(200).json(properties)
     } catch (error) {
-        return res.status(500).json(error)
+        
     }
 })
 
