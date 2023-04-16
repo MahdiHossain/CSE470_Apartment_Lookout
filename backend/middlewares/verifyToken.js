@@ -16,3 +16,14 @@ const verifyToken = async(req, res, next) => {
 }
 
 module.exports = verifyToken
+
+// {
+//     "title": "property3",
+//     "desc": "asdddfsdfsdff",
+//     "type": "Banani",
+//     "img": "asdasdasdadasdassf",
+//     "price": 10302120,
+//     "sqfeet": 121212,
+//     "rooms": 4
+
+// }
