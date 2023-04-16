@@ -151,13 +151,12 @@ propertyController.put('/:id', verifyToken, async (req, res) => {
 propertyController.delete('/:id', verifyToken, async (req, res) => {
     try {
         const property = await Property.findById(req.params.id)
-        if (property.currentOwner.toString() !== req.user.id) {
+        if (property.currentOwner.toString() !== req.user.id.toString()) {
             throw new Error("You are not allowed to delete other people properties")
-        }
+        } else 
+            {await property.delete()
 
-        await property.delete()
-
-        return res.status(200).json({msg: "Successfully deleted property"})
+            return res.status(200).json({msg: "Successfully deleted property"})}
     } catch (error) {
         return res.status(500).json(error)
     }
