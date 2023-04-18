@@ -6,7 +6,8 @@ const dotenv = require('dotenv').config();
 const cors = require('cors');
 const bodyparser = require('body-parser');
 const authController = require('./controllers/authController');
-const propertyController = require('./controllers/propertyController')
+const propertyController = require('./controllers/propertyController');
+const uploadController = require('./controllers/uploadController');
 const app = express();
 
 
@@ -31,6 +32,7 @@ const dbConnection = async () => {
   app.use(bodyparser.json({ type: 'application/vnd.api+json' }));
   app.use("/auth", authController);
   app.use("/property", propertyController);
+  app.use("/upload", uploadController);
   app.use(cors);
 
 
