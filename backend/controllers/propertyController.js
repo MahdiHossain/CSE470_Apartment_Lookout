@@ -48,41 +48,41 @@ propertyController.get('/find/types', async(req, res) => {
         const bananiType = await Property.countDocuments({ type: 'Banani' });
         const dhanmondiType = await Property.countDocuments({ type: 'Dhanmondi' });
         const baridharaType = await Property.countDocuments({ type: 'Baridhara' });
-        const uttaraype = await Property.countDocuments({ type: 'Uttara' });
-        const mirpurType = await Property.countDocuments({ type: 'Mirpur' });
         const mohakhaliType = await Property.countDocuments({ type: 'Mohakhali' });
-        const mohammadpurType = await Property.countDocuments({ type: 'Mohammadpur' });
-        const kakrailType = await Property.countDocuments({ type: 'Kakrail' });
-        const nayaPaltanType = await Property.countDocuments({ type: 'Naya_Paltan' });
-        const elephantRoadType = await Property.countDocuments({ type: 'Elephant_Road' });
-        const farmgateType = await Property.countDocuments({ type: 'Farmgate' });
-        const newMarketType = await Property.countDocuments({ type: 'New_Market' });
-        const shahbagType = await Property.countDocuments({ type: 'Shahbag' });
-        const motijheelType = await Property.countDocuments({ type: 'Motijheel' });
-        const bananiDOHSType = await Property.countDocuments({ type: 'Banani_DOHS' });
-        const bashundharaRAType = await Property.countDocuments({ type: 'Bashundhara_RA' });
-        const khilgaonType = await Property.countDocuments({ type: 'Khilgaon' });
-        const malibaghType = await Property.countDocuments({ type: 'Malibagh' });
+        // const mirpurType = await Property.countDocuments({ type: 'Mirpur' });
+        // const mohakhaliType = await Property.countDocuments({ type: 'Mohakhali' });
+        // const mohammadpurType = await Property.countDocuments({ type: 'Mohammadpur' });
+        // const kakrailType = await Property.countDocuments({ type: 'Kakrail' });
+        // const nayaPaltanType = await Property.countDocuments({ type: 'Naya_Paltan' });
+        // const elephantRoadType = await Property.countDocuments({ type: 'Elephant_Road' });
+        // const farmgateType = await Property.countDocuments({ type: 'Farmgate' });
+        // const newMarketType = await Property.countDocuments({ type: 'New_Market' });
+        // const shahbagType = await Property.countDocuments({ type: 'Shahbag' });
+        // const motijheelType = await Property.countDocuments({ type: 'Motijheel' });
+        // const bananiDOHSType = await Property.countDocuments({ type: 'Banani_DOHS' });
+        // const bashundharaRAType = await Property.countDocuments({ type: 'Bashundhara_RA' });
+        // const khilgaonType = await Property.countDocuments({ type: 'Khilgaon' });
+        // const malibaghType = await Property.countDocuments({ type: 'Malibagh' });
          return res.status(200).json({
             Gulshan: gulshanType,
             Banani: bananiType,
             Dhanmondi: dhanmondiType,
             Baridhara: baridharaType,
-            Uttara: uttaraype,
-            Mirpur: mirpurType,
-            Mohakhali: mohakhaliType,
-            Mohammadpur: mohammadpurType,
-            Kakrail: kakrailType,
-            Naya_Paltan: nayaPaltanType,
-            Elephant_Road: elephantRoadType,
-            Farmgate: farmgateType,
-            New_Market: newMarketType,
-            Shahbag: shahbagType,
-            Motijheel: motijheelType,
-            Banani_DOHS: bananiDOHSType,
-            Bashundhara_RA: bashundharaRAType,
-            Khilgaon: khilgaonType,
-            Malibagh: malibaghType
+            mohakhali: mohakhaliType
+            // Mirpur: mirpurType,
+            // Mohakhali: mohakhaliType,
+            // Mohammadpur: mohammadpurType,
+            // Kakrail: kakrailType,
+            // Naya_Paltan: nayaPaltanType,
+            // Elephant_Road: elephantRoadType,
+            // Farmgate: farmgateType,
+            // New_Market: newMarketType,
+            // Shahbag: shahbagType,
+            // Motijheel: motijheelType,
+            // Banani_DOHS: bananiDOHSType,
+            // Bashundhara_RA: bashundharaRAType,
+            // Khilgaon: khilgaonType,
+            // Malibagh: malibaghType
         })
     } catch (error) {
         return res.status(500).json(error) 

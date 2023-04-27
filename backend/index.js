@@ -26,15 +26,17 @@ const dbConnection = async () => {
   };
   dbConnection();
 
+  app.use('/images', express.static('public/images'))
+
   //routes & middleware
   app.use(bodyparser.json());
   app.use(bodyparser.urlencoded({extended: true}));
   app.use(bodyparser.json({ type: 'application/vnd.api+json' }));
+  app.use(cors());
   app.use("/auth", authController);
   app.use("/property", propertyController);
   app.use("/upload", uploadController);
-  app.use(cors);
 
 
-const port = process.env.PORT || 8012;
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log('Server started successfully')); //Start the server on the specified port 
