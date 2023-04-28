@@ -218,9 +218,85 @@
     cursor: pointer;
 }
 
-
+.yachtBtn{
+    background-color: #f00;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.25rem 0.75rem;
+    border-radius: 8px;
+}
 
 .myProfile{
     color: inherit;
 }
 
+/* RESPONSIVEE */
+@media only screen and (max-width: 992px) {
+    .listPropertyWrapper {
+        height: 95vh;
+        width: 60vw;
+    }
+
+    .listPropertyWrapper button {
+        margin-top: 0;
+    }
+
+    .listPropertyWrapper>h2 {
+        margin: 1.75rem 0;
+        margin-bottom: 2rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .listPropertyWrapper {
+        position: absolute;
+        left: 18rem;
+    }
+
+    .wrapper {
+        display: none;
+    }
+
+    .mobileNav {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+    }
+
+    .hamburgerIcon {
+        display: block;
+        margin-left: 1rem;
+        font-size: 26px;
+    }
+
+    .center>input {
+        background-color: transparent;
+    }
+
+    .mobileCloseIcon {
+        position: absolute;
+        top: 1.5rem;
+        right: 1rem;
+        font-size: 24px;
+    }
+
+    .navigation {
+        width: 75%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 99999999;
+        background-color: #efefef;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    .modal {
+        background-color: #fff;
+    }
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+  import React, { useState } from 'react'
 import classes from './navbar.module.css'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
@@ -23,7 +23,7 @@ const Navbar = () => {
 
   useEffect(() => {
     setState(prev => {
-      return {...prev, continent: 'europe', type: 'beach'}
+      return {...prev, type: 'gulshan'}
     })
   }, [])
 
@@ -161,12 +161,12 @@ const Navbar = () => {
               <input value={state?.title} type="text" placeholder='Title' name="title" onChange={handleState} />
               <select value={state?.type} required name='type' onChange={handleState}>
                  <option disabled>Select Type</option>
-                 <option value='beach'>Beach</option>
-                 <option value='village'>Village</option>
-                 <option value='mountain'>Mountan</option>
+                 <option value='gulshan'>Gulshan</option>
+                 <option value='banani'>Banani</option>
+                 <option value='dhanmondi'>Dhanmondi</option>
               </select>
               <input value={state?.desc} type="text" placeholder='Desc' name="desc" onChange={handleState} />
-              <select value={state?.continent} required name='continent' onChange={handleState}>
+              {/* <select value={state?.continent} required name='continent' onChange={handleState}>
                  <option disabled>Select Continent</option>
                  <option value='Europe'>Europe</option>
                  <option value='Asia'>Asia</option>
@@ -174,7 +174,7 @@ const Navbar = () => {
                  <option value='North America'>North America</option>
                  <option value='Australia'>Australia</option>
                  <option value='Africa'>Africa</option>
-              </select>
+              </select> */}
               <input value={state?.price} type="number" placeholder='Price' name="price" onChange={handleState} />
               <input value={state?.sqmeters} type="number" placeholder='Sq. meters' name="sqmeters" onChange={handleState} />
               <input value={state?.beds} type="number" placeholder='Beds' name="beds" step={1} min={1} onChange={handleState} />
@@ -239,7 +239,6 @@ const Navbar = () => {
                       <input value={state?.title} type="text" placeholder='Title' name="title" onChange={handleState} />
                       <input value={state?.type} type="text" placeholder='Type' name="type" onChange={handleState} />
                       <input value={state?.desc} type="text" placeholder='Desc' name="desc" onChange={handleState} />
-                      <input value={state?.continent} type="text" placeholder='Continent' name="continent" onChange={handleState} />
                       <input value={state?.price} type="number" placeholder='Price' name="price" onChange={handleState} />
                       <input value={state?.sqmeters} type="number" placeholder='Sq. meters' name="sqmeters" onChange={handleState} />
                       <input value={state?.beds} type="number" placeholder='Beds' name="beds" step={1} min={1} onChange={handleState} />

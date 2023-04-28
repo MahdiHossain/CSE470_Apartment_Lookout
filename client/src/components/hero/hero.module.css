@@ -1,11 +1,12 @@
 .container{
     height: calc(100vh - 60px);
     width: 100%;
-    background-image: url('../../assets/stock-bg.jpeg');
-    background-size:contain;
-    /* background-color: rgba(0, 0, 0, 0.4);
-    background-blend-mode: darken; */
+    background-image: url('../../assets/estate.jpg');
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.4);
+    background-blend-mode: darken;
 }
+
 .wrapper{
     max-width: 1180px;
     margin: 0 auto;
@@ -31,7 +32,7 @@
 }
 
 .wrapper > .options{
-    width: 50%;
+    width: 70%;
     background-color: #fff;
     padding: 1.25rem 1.5rem;
     border-radius: 20px;
@@ -47,21 +48,7 @@
     border: none;
     outline: none;
     padding: 0.25rem 0.75rem;
-    background-color: rgb(92, 92, 176);
-    color: #fff;
-    border-radius: 12px;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.options > select{
-    height: 40px;
-    min-width: 160px;
-    max-width: 200px;
-    border: none;
-    outline:auto;
-    padding: 0.25rem 0.75rem;
-    background-color: #3512d1;
+    background-color: blue;
     color: #fff;
     border-radius: 12px;
     font-size: 18px;
@@ -87,3 +74,19 @@
     fill: #fff;
     cursor: pointer;
 }
+
+/* RESPONSIVEE */
+@media only screen and (max-width: 768px) {
+    .wrapper > h2{
+        font-size: 40px;
+    }
+    
+    .wrapper > h5{
+        font-size: 30px; 
+    }
+
+    .wrapper > .options{
+        width: 90%;
+    }
+}
+    

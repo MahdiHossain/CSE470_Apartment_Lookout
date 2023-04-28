@@ -31,3 +31,30 @@ footer {
     font-size: 15px;
 }
 
+/* !!!!!!!! RESPONSIVE !!!!!!!! */
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+    footer{
+        padding-top: 100px;
+    }
+    
+    .wrapper{
+        align-items: flex-start;
+        gap: 1.25rem;
+    }
+    
+    .col:nth-child(2) {
+        font-size: 15px;
+        gap: 0.3rem;
+    }
+ 
+    .col>h2 {
+        font-size: 18px;
+        font-weight: 600;
+    }
+    
+    .col>p {
+        max-width: 325px;
+    }
+}

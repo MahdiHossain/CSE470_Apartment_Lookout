@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8000"
+const BASE_URL = "http://localhost:5001"
 
 export const request = async (url, method, headers = {}, body = {}, isNotStringified = false) => {
     let res

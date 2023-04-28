@@ -52,7 +52,7 @@ const Signup = () => {
           <input type="email" placeholder='Email...' onChange={(e) => setEmail(e.target.value)} />
           <input type="password" placeholder='Password...' onChange={(e) => setPassword(e.target.value)} />
           <button type="submit">Sign in</button>
-          <p>Don't have an account? <Link to='/signup'>Register</Link></p>
+          <p>Already have an account? <Link to='/signup'>Register</Link></p>
         </form>
         {error && (
           <div className={classes.error}>

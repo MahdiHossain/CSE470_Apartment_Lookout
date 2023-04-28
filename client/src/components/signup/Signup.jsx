@@ -23,7 +23,6 @@ const Signup = () => {
     })
   }
 
-
   const handleRegister = async (e) => {
     e.preventDefault()
 
@@ -43,7 +42,7 @@ const Signup = () => {
         formData.append('filename', filename)
         formData.append('image', photo)
 
-        await fetch(`http://localhost:8000/upload/image`, {
+        await fetch(`http://localhost:5000/upload/image`, {
           headers: {
             'Authorization': `Bearer ${token}`
           },
@@ -89,16 +88,16 @@ const Signup = () => {
           <button type="submit">Register</button>
           <p>Already have an account? <Link to='/signin'>Login</Link></p>
         </form>
-        {/* {error && (
+        {error && (
           <div className={classes.error}>
             There was an error signing up! Try again.
           </div>
-        )} */}
-        {/* {emptyFields && (
+        )}
+        {emptyFields && (
           <div className={classes.error}>
             Fill all fields!
           </div>
-        )} */}
+        )}
       </div>
     </div>
   )
