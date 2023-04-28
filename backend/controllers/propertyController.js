@@ -4,12 +4,12 @@ const User = require('../models/User')
 const propertyController = require('express').Router()
 
 // get all
-propertyController.get('/getAll', async(req,res) => {
+propertyController.get('/getAll', async (req, res) => {
     try {
-        const properties = await Property.find({})
+        const properties = await Property.find({}).populate("currentOwner", '-password')
 
         console.log(properties)
-        
+
         return res.status(200).json(properties)
     } catch (error) {
         console.error(error)
@@ -29,26 +29,28 @@ propertyController.get('/find/featured', async (req, res) => {
 // get all from type
 propertyController.get('/find', async (req, res) => {
     const type = req.query
+    let properties = []
     try {
-        if(type){
-            const properties = await Property.find(type).populate('currentOwner', '-password')
-            return res.status(200).json(properties)
+        if (type) {
+            properties = await Property.find(type).populate("owner", '-password')
         } else {
-            return res.status(500).json({msg: "No such Property type"})
+            properties = await Property.find({})
         }
+
+        return res.status(200).json(properties)
     } catch (error) {
-        
+        return res.status(500).json(error)
     }
 })
 
 // TODO FETCH TYPE OF PROPERTIES. EX: {BEACH: 34, MOUNTAIN: 23}
 propertyController.get('/find/types', async(req, res) => {
     try {
-        const gulshanType = await Property.countDocuments({ type: 'Gulshan' });
-        const bananiType = await Property.countDocuments({ type: 'Banani' });
-        const dhanmondiType = await Property.countDocuments({ type: 'Dhanmondi' });
-        const baridharaType = await Property.countDocuments({ type: 'Baridhara' });
-        const mohakhaliType = await Property.countDocuments({ type: 'Mohakhali' });
+        const gulshanType = await Property.countDocuments({ type: 'gulshan' });
+        const bananiType = await Property.countDocuments({ type: 'banani' });
+        const dhanmondiType = await Property.countDocuments({ type: 'dhanmondi' });
+        // const baridharaType = await Property.countDocuments({ type: 'baridhara' });
+        // const mohakhaliType = await Property.countDocuments({ type: 'mohakhali' });
         // const mirpurType = await Property.countDocuments({ type: 'Mirpur' });
         // const mohakhaliType = await Property.countDocuments({ type: 'Mohakhali' });
         // const mohammadpurType = await Property.countDocuments({ type: 'Mohammadpur' });
@@ -67,8 +69,8 @@ propertyController.get('/find/types', async(req, res) => {
             Gulshan: gulshanType,
             Banani: bananiType,
             Dhanmondi: dhanmondiType,
-            Baridhara: baridharaType,
-            mohakhali: mohakhaliType
+            // Baridhara: baridharaType,
+            // mohakhali: mohakhaliType
             // Mirpur: mirpurType,
             // Mohakhali: mohakhaliType,
             // Mohammadpur: mohammadpurType,
@@ -88,29 +90,40 @@ propertyController.get('/find/types', async(req, res) => {
         return res.status(500).json(error) 
     }
 })
-
-propertyController.get('/find/myproperties', verifyToken, async(req, res) => {
+// fetch my properties
+propertyController.get('/find/my-properties', verifyToken, async (req, res) => {
     try {
-       const properties = await Property.find({currentOwner: req.user.id})
-       
-       return res.status(200).json(properties)
+        const properties = await Property.find({ currentOwner: req.user.id })
+
+        return res.status(200).json(properties)
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+// fetch bookmarked yachts
+propertyController.get('/find/bookmarked-properties', verifyToken, async (req, res) => {
+    try {
+        const properties = await Property.find({ bookmarkedUsers: { $in: [req.user.id] } })
+
+        return res.status(200).json(properties)
     } catch (error) {
         console.error(error)
     }
 })
 
 // TODO FETCH INDIVIDUAL PROPERTY
-propertyController.get('/find/:id', async(req, res) => {
+propertyController.get('/find/:id', async (req, res) => {
     try {
         const property = await Property.findById(req.params.id).populate('currentOwner', '-password')
 
-        if(!property){
+        if (!property) {
             throw new Error('No such property with that id')
         } else {
             return res.status(200).json(property)
         }
     } catch (error) {
-        return res.status(500).json(error) 
+        return res.status(500).json(error)
     }
 })
 
@@ -136,10 +149,10 @@ propertyController.put('/:id', verifyToken, async (req, res) => {
 
         const updatedProperty = await Property.findByIdAndUpdate(
             req.params.id,
-            {$set: req.body}, 
-            {new: true}
+            { $set: req.body },
+            { new: true }
         )
-        
+
 
         return res.status(200).json(updatedProperty)
     } catch (error) {
@@ -147,22 +160,44 @@ propertyController.put('/:id', verifyToken, async (req, res) => {
     }
 })
 
-// delete estate
+// bookmark/unbookmark estate
+propertyController.put('/bookmark/:id', verifyToken, async (req, res) => {
+    try {
+        let property = await Property.findById(req.params.id)
+        if (property.currentOwner.toString() === req.user.id) {
+            throw new Error("You are not allowed to bookmark your project")
+        }
 
+
+        if (property.bookmarkedUsers.includes(req.user.id)) {
+            property.bookmarkedUsers = property.bookmarkedUsers.filter(id => id !== req.user.id)
+            await property.save()
+        } else {
+            property.bookmarkedUsers.push(req.user.id)
+
+            await property.save()
+        }
+
+        return res.status(200).json(property)
+    } catch (error) {
+        return res.status(500).json(error)
+    }
+})
+
+// delete estate
 propertyController.delete('/:id', verifyToken, async (req, res) => {
     try {
-        const property = await Property.findById(req.params.id);
-        if (!property) {
-            throw new Error('Property not found');
-        }
+        const property = await Property.findById(req.params.id)
         if (property.currentOwner.toString() !== req.user.id) {
-            throw new Error('You are not allowed to delete other people\'s properties');
+            throw new Error("You are not allowed to delete other people properties")
         }
-        await Property.deleteOne({ _id: property._id });
-        return res.status(200).json({ msg: 'Successfully deleted property' });
+
+        await property.delete()
+
+        return res.status(200).json({ msg: "Successfully deleted property" })
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ msg: 'Could not delete property' });
+        return res.status(500).json(error)
     }
-});
+})
+
 module.exports = propertyController

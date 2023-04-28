@@ -4,66 +4,49 @@ const PropertySchema = new mongoose.Schema({
     currentOwner: {
         type: mongoose.Types.ObjectId,
         ref: "User",
-        required: true,
+        required: true
     },
     title: {
         type: String,
         required: true,
-        min: 8,
+        min: 6,
     },
     type: {
         type: String,
-        enum: [
-          "Gulshan",
-          "Banani",
-          "Dhanmondi",
-          "Baridhara",
-          "Mohakhali",
-        //   "Mirpur",
-        //   "Mohakhali",
-        //   "Mohammadpur",
-        //   "Kakrail",
-        //   "Naya_Paltan",
-        //   "Elephant_Road",
-        //   "Farmgate",
-        //   "New_Market",
-        //   "Shahbag",
-        //   "Motijheel",
-        //   "Banani_DOHS",
-        //   "Bashundhara_RA",
-        //   "Khilgaon",
-        //   "Malibagh"
-        ],
-        required: true,
+        enum: ["gulshan", "banani", "mountain"],
+        required: true
     },
     desc: {
         type: String,
         required: true,
-        min: 20,
+        min: 50,
     },
     img: {
         type: String,
-        required: true,
+        required: true
     },
     price: {
         type: Number,
-        required: true,
+        required: true
     },
-    sqfeet: {
+    sqmeters: {
         type: Number,
         required: true,
+        min: 15
     },
-    rooms: {
+    continent: {
+        type: String,
+        required: true
+    },
+    beds: {
         type: Number,
         required: true,
-        min: 2,
+        min: 1
     },
-    featured: {
-        type: Boolean,
-        default: false,
+    bookmarkedUsers: {
+        type: [String],
+        default: []
     }
-    
-
 }, {timestamps: true})
 
 module.exports = mongoose.model("Property", PropertySchema)

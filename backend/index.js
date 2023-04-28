@@ -1,17 +1,15 @@
-// This is the start of our express app. We are importing express, mongoose, dotenv and cors, and initializing our app with express.
-
-const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv').config();
-const cors = require('cors');
-const bodyparser = require('body-parser');
-const authController = require('./controllers/authController');
-const propertyController = require('./controllers/propertyController');
-const uploadController = require('./controllers/uploadController');
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv").config();
+const cors = require("cors");
 const app = express();
+const authController = require('./controllers/authController')
+const propertyController = require('./controllers/propertyController')
+const uploadController = require('./controllers/uploadController');
+const userController = require("./controllers/userController");
+const commentController = require("./controllers/commentController");
 
-
-//mongodb connect 
+// db connecting
 mongoose.set('strictQuery', false) // This line of code turns off strict query mode for mongoose. This will allow mongoose to use non-standard query syntax.
 const dbConnection = async () => {
     try {
@@ -26,17 +24,18 @@ const dbConnection = async () => {
   };
   dbConnection();
 
-  app.use('/images', express.static('public/images'))
+// middlewares
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/images', express.static('public/images'))
 
-  //routes & middleware
-  app.use(bodyparser.json());
-  app.use(bodyparser.urlencoded({extended: true}));
-  app.use(bodyparser.json({ type: 'application/vnd.api+json' }));
-  app.use(cors());
-  app.use("/auth", authController);
-  app.use("/property", propertyController);
-  app.use("/upload", uploadController);
+app.use("/auth", authController);
+app.use("/property", propertyController);
+app.use('/upload', uploadController)
+app.use('/user', userController)
+app.use('/comment', commentController)
 
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log('Server started successfully')); //Start the server on the specified port 
+// starting server
+const port = process.env.PORT || 8012;
+app.listen(port, () => console.log("Server has been started"));
