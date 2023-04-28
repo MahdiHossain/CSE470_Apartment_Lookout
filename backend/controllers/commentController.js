@@ -34,9 +34,9 @@ commentController.delete('/:commentId', verifyToken, async (req, res) => {
 
         if (comment.author.toString() === req.user.id) {
             await Comment.findByIdAndDelete(req.params.commentId)
-            return res.status(200).json({ msg: "Comment has been successfully deleted" })
+            return res.status(200).json({ msg: "Comment has been deleted successfully!" })
         } else {
-            return res.status(403).json({ msg: "You can delete only your own comments" })
+            return res.status(403).json({ msg: "You can only delete your own comments!" })
         }
     } catch (error) {
         return res.status(500).json(error.message)

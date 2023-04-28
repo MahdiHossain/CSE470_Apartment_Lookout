@@ -88,8 +88,8 @@ const Properties = () => {
     <div className={classes.container}>
       <div className={classes.wrapper}>
         <div className={classes.options}>
-          <select value={state?.type} name="type" onChange={handleState}>
-            <option disabled>Select type</option>
+          <select value={state?.type} name="Area" onChange={handleState}>
+            <option disabled>Select Area</option>
             <option value='gulshan'>Gulshan</option>
             <option value='banani'>Banani</option>
             <option value='dhanmondi'>Dhanmondi</option>

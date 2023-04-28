@@ -23,7 +23,7 @@ const Hero = () => {
         <h5>Search the best selection of luxury real estate</h5>
         <div className={classes.options}>
           <select onChange={(e) => setType(e.target.value)}>
-            <option disabled>Select type</option>
+            <option disabled>Select Area</option>
             <option value='gulshan'>Gulshan</option>
             <option value='banani'>Banani</option>
             <option value='dhanmondi'>Dhanmondi</option>

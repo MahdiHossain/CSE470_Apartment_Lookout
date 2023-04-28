@@ -143,8 +143,6 @@ const Navbar = () => {
                   <span className={classes.logoutBtn} onClick={handleLogout}>Logout</span>
                   <Link  to={`/my-profile`} onClick={() => setShowModal(prev => !prev)} className={classes.myProfile}>My Profile</Link>
                   <Link onClick={() => setShowForm(true)} className={classes.list}>List your property</Link>
-                  <Link onClick={() => setShowModal(prev => !prev)} className={classes.yachtBtn} to={`/yachts`}>See yachts!</Link>
-                  <Link to={`/create-yacht`} onClick={() => setShowModal(prev => !prev)}>List your yacht</Link>
                 </div>
               )}
             </>
@@ -166,15 +164,6 @@ const Navbar = () => {
                  <option value='dhanmondi'>Dhanmondi</option>
               </select>
               <input value={state?.desc} type="text" placeholder='Desc' name="desc" onChange={handleState} />
-              {/* <select value={state?.continent} required name='continent' onChange={handleState}>
-                 <option disabled>Select Continent</option>
-                 <option value='Europe'>Europe</option>
-                 <option value='Asia'>Asia</option>
-                 <option value='South America'>South America</option>
-                 <option value='North America'>North America</option>
-                 <option value='Australia'>Australia</option>
-                 <option value='Africa'>Africa</option>
-              </select> */}
               <input value={state?.price} type="number" placeholder='Price' name="price" onChange={handleState} />
               <input value={state?.sqmeters} type="number" placeholder='Sq. meters' name="sqmeters" onChange={handleState} />
               <input value={state?.beds} type="number" placeholder='Beds' name="beds" step={1} min={1} onChange={handleState} />
@@ -261,7 +250,6 @@ const Navbar = () => {
           {!showMobileNav && <GiHamburgerMenu onClick={() => setShowMobileNav(prev => !prev)} className={classes.hamburgerIcon} />}
         </div>
       }
-
 
       {/* error */}
       {error && (

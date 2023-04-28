@@ -11,10 +11,6 @@ import { useSelector } from 'react-redux'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react';
 import EditProperty from './components/editProperty/EditProperty';
-import Yachts from './components/yachts/Yachts';
-import YachtDetails from './components/yachtDetails/YachtDetails';
-import CreateYacht from './components/createYacht/CreateYacht';
-import YachtEdit from './components/yachtEdit/YachtEdit';
 import MyProfile from './components/myProfile/MyProfile';
 import UpdateProfile from './components/updateProfile/UpdateProfile';
 import './App.css';
@@ -49,34 +45,6 @@ function App() {
             <Footer />
           </>
         } />
-        <Route path='/yachts' element={user ?
-          <>
-            <Navbar />
-            <Yachts />
-            <Footer />
-          </>
-          : <Navigate to='/signin' />} />
-        <Route path='/yacht/:id' element={user ?
-          <>
-            <Navbar />
-            <YachtDetails />
-            <Footer />
-          </>
-          : <Navigate to='/signin' />} />
-        <Route path='/create-yacht' element={user ?
-          <>
-            <Navbar />
-            <CreateYacht />
-            <Footer />
-          </>
-          : <Navigate to='/signin' />} />
-        <Route path='/yacht-edit/:id' element={user ?
-          <>
-            <Navbar />
-            <YachtEdit />
-            <Footer />
-          </>
-          : <Navigate to='/signin' />} />
         <Route path='/propertyDetail/:id' element={
           <>
             <Navbar />

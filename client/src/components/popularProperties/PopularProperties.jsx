@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import classes from './popularProperties.module.css'
-import img1 from '../../assets/realestatebeach.jpg'
-import img2 from '../../assets/realestatemountain.jpg'
-import img3 from '../../assets/realestatecountryside.jpg'
+import img1 from '../../assets/house1.png'
+import img2 from '../../assets/house2.png'
+import img3 from '../../assets/house3.png'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { request } from '../../util/fetchAPI'
@@ -31,8 +31,8 @@ const PopularProperties = () => {
     <div className={classes.container}>
       <div className={classes.wrapper}>
         <div className={classes.titles}>
-          <h5>Different types of properties</h5>
-          <h2>Best type of properties for you</h2>
+          <h5>Different types of Apartments</h5>
+          <h2>Best type of apartments for you</h2>
         </div>
         <div className={classes.properties}>
           <Link to={`/properties?type=gulshan&priceRange=1`} className={classes.property}>

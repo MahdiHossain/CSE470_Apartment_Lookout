@@ -90,7 +90,7 @@ const EditProperty = () => {
                 <form onSubmit={handleUpdate}>
                     <input value={propertyDetails?.title} type="text" placeholder='Title' name="title" onChange={handleState} />
                     <select required name='type' onChange={handleState}>
-                        <option disabled>Select Type</option>
+                        <option disabled>Select Area</option>
                         <option value='gulshan'>Gulshan</option>
                         <option value='banani'>Banani</option>
                         <option value='dhanmondi'>Dhanmondi</option>

@@ -6,16 +6,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { request } from '../../util/fetchAPI'
 import person from '../../assets/person.jpg'
-import YachtCard from '../yachtCard/YachtCard'
 import classes from './myProfile.module.css'
 import { logout } from '../../redux/authSlice'
 
 const MyProfile = () => {
     const { user, token } = useSelector((state) => state.auth)
     const [listedProperties, setListedProperties] = useState([])
-    const [listedYachts, setListedYachts] = useState([])
     const [bookmarkedProperties, setBookmarkedProperties] = useState([])
-    const [bookmarkedYachts, setBookmarkedYachts] = useState([])
     const [activeBtn, setActiveBtn] = useState(0)
     const [deleteModal, setDeleteModal] = useState(false)
     const [error, setError] = useState(false)
@@ -39,21 +36,6 @@ const MyProfile = () => {
     }, [])
 
     useEffect(() => {
-        const fetchListedYachts = async () => {
-            try {
-                const options = {
-                    Authorization: `Bearer ${token}`
-                }
-                const data = await request(`/yacht/find/my-yachts`, 'GET', options)
-                setListedYachts(data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchListedYachts()
-    }, [])
-
-    useEffect(() => {
         const fetchBookmarkedProperties = async () => {
             try {
                 const options = {
@@ -66,21 +48,6 @@ const MyProfile = () => {
             }
         }
         fetchBookmarkedProperties()
-    }, [])
-
-    useEffect(() => {
-        const fetchBookmarkedYachts = async () => {
-            try {
-                const options = {
-                    Authorization: `Bearer ${token}`
-                }
-                const data = await request(`/yacht/find/bookmarked-yachts`, 'GET', options)
-                setBookmarkedYachts(data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchBookmarkedYachts()
     }, [])
 
     const handleDeleteProfile = async () => {
@@ -124,15 +91,10 @@ const MyProfile = () => {
                     <button className={`${classes.button} ${activeBtn === 0 && classes.active}`} onClick={() => setActiveBtn(prev => 0)}>
                         Listed properties
                     </button>
-                    <button className={`${classes.button} ${activeBtn === 1 && classes.active}`} onClick={() => setActiveBtn(prev => 1)}>
-                        Listed yachts
-                    </button>
                     <button className={`${classes.button} ${activeBtn === 2 && classes.active}`} onClick={() => setActiveBtn(prev => 2)}>
                         Bookmarked properties
                     </button>
-                    <button className={`${classes.button} ${activeBtn === 3 && classes.active}`} onClick={() => setActiveBtn(prev => 3)}>
-                        Bookmarked yachts
-                    </button>
+
                 </div>
                 <div className={classes.catalog}>
                     {activeBtn === 0 && (
@@ -162,18 +124,6 @@ const MyProfile = () => {
                             </div>
                         </>
                     )}
-                    {activeBtn === 1 && (
-                        <>
-                            {listedYachts?.length > 0 && <h2 className={classes.title}>Listed Yachts</h2>}
-                            {listedYachts?.length > 0 ? (
-                                <div className={classes.yachts}>
-                                    {listedYachts.map((yacht) => (
-                                        <YachtCard yacht={yacht} key={yacht._id} />
-                                    ))}
-                                </div>
-                            ) : <h2 className={classes.noListed}>You have no listed yachts</h2>}
-                        </>
-                    )}
                     {activeBtn === 2 && (
                         <>
                             {bookmarkedProperties?.length > 0 && <h2 className={classes.title}>Bookmarked Properties</h2>}
@@ -201,18 +151,6 @@ const MyProfile = () => {
                             </div>
                         </>
                     )}
-                    {activeBtn === 3 && (
-                        <>
-                            {bookmarkedYachts?.length > 0 && <h2 className={classes.title}>Bookmarked Yachts</h2>}
-                            {bookmarkedYachts?.length > 0 ? (
-                                <div className={classes.yachts}>
-                                    {bookmarkedYachts.map((yacht) => (
-                                        <YachtCard yacht={yacht} key={yacht._id} />
-                                    ))}
-                                </div>
-                            ) : <h2 className={classes.noListed}>You have no bookmarked yachts</h2>}
-                        </>
-                    )}
                 </div>
                 {error && (
                     <div className={classes.error}>
@@ -225,8 +163,4 @@ const MyProfile = () => {
 }
 
 // 0 - Listed Properties
-// 1 - Listed Yachts
-// 2 - Bookmarked Properties
-// 3 - Bookmarked Yachts
-
 export default MyProfile

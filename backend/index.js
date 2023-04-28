@@ -38,4 +38,4 @@ app.use('/comment', commentController)
 
 // starting server
 const port = process.env.PORT || 8012;
-app.listen(port, () => console.log("Server has been started"));
+app.listen(port, () => console.log("Server started successfully!"));
