@@ -112,17 +112,21 @@ const Navbar = () => {
     <div className={`${classes.container} ${isScrolled && classes.scrolled}`}>
       <div className={classes.wrapper}>
         <Link to='/' onClick={scrollToTop} className={classes.left}>
-          Real Estate <BsHouseDoor />
+          Aparment Lookout<BsHouseDoor />
         </Link>
         <ul className={classes.center}>
           <li onClick={scrollToTop} className={classes.listItem}>
+          <Link to='/' onClick={scrollToTop}>
             Home
+          </Link>
           </li>
           <li className={classes.listItem}>
             About
           </li>
           <li className={classes.listItem}>
+          <Link to='/featuredProperties' onClick={scrollToTop}>
             Featured
+          </Link>
           </li>
           <li className={classes.listItem}>
             Contacts
@@ -183,73 +187,7 @@ const Navbar = () => {
           </div>
         </div>
       }
-      {
-        // mobile screen 
-        <div className={classes.mobileNav}>
-          {showMobileNav &&
-            <div className={classes.navigation}>
-              <Link to='/' onClick={scrollToTop} className={classes.left}>
-                Real Estate <BsHouseDoor />
-              </Link>
-              <AiOutlineClose className={classes.mobileCloseIcon} onClick={() => setShowMobileNav(false)} />
-              <ul className={classes.center}>
-                <li onClick={scrollToTop} className={classes.listItem}>
-                  Home
-                </li>
-                <li className={classes.listItem}>
-                  About
-                </li>
-                <li className={classes.listItem}>
-                  Featured
-                </li>
-                <li className={classes.listItem}>
-                  Contacts
-                </li>
-              </ul>
-              <div className={classes.right}>
-                {!user ?
-                  <>
-                    <Link to='/signup'>Sign up</Link>
-                    <Link to='/signin'>Sign in</Link>
-                  </>
-                  :
-                  <>
-                    <span>Hello {user.username}!</span>
-                    <span className={classes.logoutBtn} onClick={handleLogout}>Logout</span>
-                    <Link onClick={() => setShowForm(true)} className={classes.list}>List your property</Link>
-                  </>
-                }
-              </div>
-              {showForm &&
-                <div className={classes.listPropertyForm} onClick={handleCloseForm}>
-                  <div className={classes.listPropertyWrapper} onClick={(e) => e.stopPropagation()}>
-                    <h2>List Property</h2>
-                    <form onSubmit={handleListProperty}>
-                      <input value={state?.title} type="text" placeholder='Title' name="title" onChange={handleState} />
-                      <input value={state?.type} type="text" placeholder='Type' name="type" onChange={handleState} />
-                      <input value={state?.desc} type="text" placeholder='Desc' name="desc" onChange={handleState} />
-                      <input value={state?.price} type="number" placeholder='Price' name="price" onChange={handleState} />
-                      <input value={state?.sqmeters} type="number" placeholder='Sq. meters' name="sqmeters" onChange={handleState} />
-                      <input value={state?.beds} type="number" placeholder='Beds' name="beds" step={1} min={1} onChange={handleState} />
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', width: '50%' }}>
-                        <label htmlFor='photo'>Property picture <AiOutlineFileImage /></label>
-                        <input
-                          type="file"
-                          id='photo'
-                          style={{ display: 'none' }}
-                          onChange={(e) => setPhoto(e.target.files[0])}
-                        />
-                        {photo && <p>{photo.name}</p>}
-                      </div>
-                      <button>List property</button>
-                    </form>
-                    <AiOutlineClose onClick={handleCloseForm} className={classes.removeIcon} />
-                  </div>
-                </div>}
-            </div>}
-          {!showMobileNav && <GiHamburgerMenu onClick={() => setShowMobileNav(prev => !prev)} className={classes.hamburgerIcon} />}
-        </div>
-      }
+
 
       {/* error */}
       {error && (

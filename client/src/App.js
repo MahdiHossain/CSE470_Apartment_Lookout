@@ -45,6 +45,13 @@ function App() {
             <Footer />
           </>
         } />
+        <Route path='/featuredProperies' element={
+          <>
+            <Navbar />
+            <PropertyDetail />
+            <Footer />
+          </>
+        } />
         <Route path='/propertyDetail/:id' element={
           <>
             <Navbar />
